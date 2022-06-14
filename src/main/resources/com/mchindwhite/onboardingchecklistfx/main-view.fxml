@@ -10,6 +10,7 @@
 <?import javafx.collections.FXCollections?>
 <?import java.lang.String?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextArea?>
 <VBox alignment="TOP_LEFT" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.mchindwhite.onboardingchecklistfx.MainController">
     <padding>
@@ -54,7 +55,11 @@
     <CheckBox fx:id="checkbox9" text="Step 9"/>
     <CheckBox fx:id="checkbox10" text="Step 10"/>
 
-<HBox spacing="10">
+    <TextArea fx:id="notesArea" wrapText="true" onKeyPressed="#enableAcceptButton"/>
+    <Button fx:id="notesAreaButton" text="Accept" onAction="#onAcceptButtonClick"/>
+
+
+    <HBox spacing="10">
     <Button fx:id="clearCheckBoxes" text="Clear Checkboxes" onAction="#onClearButtonClick"/>
 
     <Label fx:id="welcomeText"/>
@@ -67,3 +72,5 @@
 </VBox>
 
 <!-- VBox lays out the information in a vertical column -->
+
+<!-- keyPressed is fired whenever any key press occurs. keyTyped is fired when a key is pressed that can be converted into a unicode character. If the shift key is down, for example, pressing "a" will tell keyTyped that you typed a capital A, and keyPressed will just get the "a" key, without capital or lowercase designations. You cannot call event.getKeyChar() from keyPressed, because there is no key char associated with the events. Characters only come from keyTyped. -->

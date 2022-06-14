@@ -1,10 +1,8 @@
 package com.mchindwhite.onboardingchecklistfx;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 
@@ -20,6 +18,9 @@ public class MainController {
 
     @FXML
     private Button clearCheckBoxes;
+
+    @FXML
+    private Button notesAreaButton;
 
     @FXML
     private CheckBox checkbox1;
@@ -42,15 +43,19 @@ public class MainController {
     @FXML
     private CheckBox checkbox10;
 
+    @FXML
+    private TextArea notesArea;
 
-    //Disable the welcome button initially
+
+    //Disable the welcome button initially. And disable the notesAreaButton initially
     public void initialize() {
         helloButton.setDisable(true);
+        notesAreaButton.setDisable(true);
     }
 
     //Enable the welcome button if they check the first checkbox
     public void enableWelcomeButton() {
-        if(checkbox1.isSelected()){
+        if (checkbox1.isSelected()) {
             helloButton.setDisable(false);
         } else {
             helloButton.setDisable(true);
@@ -84,17 +89,36 @@ public class MainController {
     }
 
     //What should happen when they press cancel?
+    @FXML
     public void onCancelButtonClick() {
-
-        try{
+        try {
 //            Stage stage = (Stage) cancelButton.getScene().getWindow();
 //            stage.close();
             Window window = cancelButton.getScene().getWindow();
             window.hide();
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    //We want the accept button to be enabled after they type a note in the textArea
+    public void enableAcceptButton() {
+        String text = notesArea.getText();
+        //we don't want to enable the button if the text is empty
+        boolean dontEnableAcceptButton = text.isEmpty() || text.trim().isEmpty();
+        notesAreaButton.setDisable(dontEnableAcceptButton);
+        System.out.println("text " + text); //this needs some work, how would I save the text, add a property
+
+    }
+
+
+    //What will happen if they click the accept button, nothing yet.
+    @FXML
+    public void onAcceptButtonClick(ActionEvent actionEvent) {
+        System.out.println("The accept button was clicked");
+        System.out.println("actionEvent source " + actionEvent.getSource());
+        System.out.println("actionEvent event type " + actionEvent.getEventType());
+        System.out.println("actionEvent target " + actionEvent.getTarget());
+    }
 }
